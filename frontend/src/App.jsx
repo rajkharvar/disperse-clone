@@ -5,6 +5,7 @@ import Header from "./components/Headers";
 import Payment from "./components/Payment";
 import WalletInfo from "./components/WalletInfo";
 import Warn from "./components/Warn";
+import Web3Modal from "web3modal";
 
 function App() {
   const [isMetamaskConnected, setIsMetamaskConnected] = useState();
@@ -25,9 +26,15 @@ function App() {
     setIsLoading(false);
   };
 
+  const connect = async () => {
+    const web3modal = new Web3Modal();
+    await web3modal.connect();
+  };
+
   useEffect(() => {
     const { ethereum } = window;
     if (ethereum) {
+      connect();
       setIsMetamaskConnected(true);
       fetchNetworkDetails(ethereum);
     }
