@@ -52,7 +52,7 @@ async function main() {
     BigNumber.from(150).mul(ETHER)
   );
 
-  const transfer = await disperse.dispersToken(
+  const transfer = await disperse.disperseToken(
     alice.address,
     recipients,
     values

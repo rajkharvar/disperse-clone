@@ -5,7 +5,7 @@ import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "hardhat/console.sol";
 
 contract Disperse {
-    function dispersToken(
+    function disperseToken(
         IERC20 tokenAddress,
         address payable[] calldata recipients,
         uint256[] calldata values
