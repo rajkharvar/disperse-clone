@@ -138,6 +138,7 @@ const Payment = ({ address }) => {
         );
 
         if (disperseToken) {
+          setIsDisperseSuccessful(true);
         }
 
         // const disperseToken = await disperse.
