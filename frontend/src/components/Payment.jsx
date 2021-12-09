@@ -1,8 +1,13 @@
 import { ethers } from "ethers";
 import { useEffect, useState } from "react";
 import ERC20 from "../artifacts/ERC20.json";
+import Disperse from "../artifacts/Disperse.json";
 import Confirm from "./Confirm";
 import Recipients from "./Recipients";
+
+const DISPERSE_ADDRESS =
+  import.meta.env.VITE_DISPERSE_ADDRESS ||
+  "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512";
 
 const Payment = ({ address }) => {
   const [currentLink, setCurrentLink] = useState(null);
@@ -18,6 +23,8 @@ const Payment = ({ address }) => {
   const [recipientsData, setRecipientsData] = useState([]);
   const [total, setTotal] = useState(null);
   const [remaining, setRemaining] = useState(null);
+  const [isApproved, setIsApproved] = useState(false);
+  const [isDisperseSuccessful, setIsDisperseSuccessful] = useState(false);
 
   const getEthBalance = async (ethereum) => {
     if (!ethBalance) {
@@ -35,7 +42,6 @@ const Payment = ({ address }) => {
       if (ethereum && tokenAddress !== "") {
         const provider = new ethers.providers.Web3Provider(window.ethereum);
         const signer = provider.getSigner();
-        console.log(signer);
         const erc20 = new ethers.Contract(tokenAddress, ERC20.abi, signer);
         const name = await erc20.name();
         const symbol = await erc20.symbol();
@@ -88,6 +94,57 @@ const Payment = ({ address }) => {
     });
 
     setRecipientsData(updatedRecipients);
+  };
+
+  const approve = async () => {
+    setIsApproved(false);
+    setIsDisperseSuccessful(false);
+    try {
+      const { ethereum } = window;
+      if (ethereum && tokenAddress !== "" && total) {
+        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        const signer = provider.getSigner();
+        const erc20 = new ethers.Contract(tokenAddress, ERC20.abi, signer);
+
+        const approve = await erc20.approve(DISPERSE_ADDRESS, total);
+        if (approve) {
+          setIsApproved(true);
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const disperse = async () => {
+    try {
+      const { ethereum } = window;
+      if (ethereum && tokenAddress !== "" && recipientsData.length > 0) {
+        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        const signer = provider.getSigner();
+        const disperse = new ethers.Contract(
+          DISPERSE_ADDRESS,
+          Disperse.abi,
+          signer
+        );
+
+        const recipients = recipientsData.map((recipient) => recipient.address);
+        const values = recipientsData.map((recipient) => recipient.value);
+
+        const disperseToken = await disperse.disperseToken(
+          tokenAddress,
+          recipients,
+          values
+        );
+
+        if (disperseToken) {
+        }
+
+        // const disperseToken = await disperse.
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {
@@ -198,6 +255,10 @@ const Payment = ({ address }) => {
                   total={total}
                   tokenBalance={tokenDetails.balance}
                   remaining={remaining}
+                  approve={approve}
+                  isApproved={isApproved}
+                  disperse={disperse}
+                  isDisperseSuccessful={isDisperseSuccessful}
                 />
               )}
             </>

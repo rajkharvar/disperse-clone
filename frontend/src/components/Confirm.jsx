@@ -1,6 +1,15 @@
 import { ethers } from "ethers";
 
-const Confirm = ({ recipientsData, total, tokenBalance, remaining }) => {
+const Confirm = ({
+  recipientsData,
+  total,
+  tokenBalance,
+  remaining,
+  approve,
+  isApproved,
+  disperse,
+  isDisperseSuccessful,
+}) => {
   return (
     <div className="pt-16">
       <h3 className="text-2xl font-light italic">confirm</h3>
@@ -43,6 +52,37 @@ const Confirm = ({ recipientsData, total, tokenBalance, remaining }) => {
           </div>
         </li>
       </ul>
+      <div className="mt-8">
+        <h3 className="text-2xl font-light italic ">allowance</h3>
+        <div className="mt-4 flex items-center">
+          <button
+            onClick={approve}
+            className="px-2 py-3 italic"
+            style={{
+              background: "aquamarine",
+              boxShadow: "6px 6px crimson",
+            }}
+          >
+            Approve
+          </button>
+          {isApproved && <p className="ml-4">Token approved</p>}
+        </div>
+        <div className="mt-6 flex items-center">
+          <button
+            onClick={disperse}
+            className="px-2 py-3 italic"
+            style={{
+              background: "aquamarine",
+              boxShadow: "6px 6px crimson",
+            }}
+          >
+            disperse token
+          </button>
+          {isDisperseSuccessful && (
+            <p className="ml-4">Disperse token successful 🎉</p>
+          )}
+        </div>
+      </div>
     </div>
   );
 };
