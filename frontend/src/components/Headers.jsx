@@ -1,6 +1,9 @@
+import { useContext } from "react";
+import { NetworkContext } from "../App";
 import EthereumSVG from "../assets/ethereum.svg";
 
 const Header = ({ address }) => {
+  const networkContext = useContext(NetworkContext);
   return (
     <div>
       <div className="flex space-between">
@@ -14,7 +17,11 @@ const Header = ({ address }) => {
           alt="Ethereum SVG"
         />
         <h2 className="mt-8 text-4xl font-light">disperse</h2>
-        {address && <span className="text-l pt-2">🤔</span>}
+        {address && (
+          <span className="text-l pt-2 font-light">
+            {networkContext.network || "🤔"}
+          </span>
+        )}
       </div>
       <div></div>
       <p className="pt-8 text-l font-light">

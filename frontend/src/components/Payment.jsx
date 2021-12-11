@@ -1,15 +1,14 @@
 import { ethers } from "ethers";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import ERC20 from "../artifacts/ERC20.json";
 import Disperse from "../artifacts/Disperse.json";
 import Confirm from "./Confirm";
 import Recipients from "./Recipients";
-
-const DISPERSE_ADDRESS =
-  import.meta.env.VITE_DISPERSE_ADDRESS ||
-  "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512";
+import { NetworkContext } from "../App";
+import { disperseAddresses } from "../utils/constants";
 
 const Payment = ({ address }) => {
+  const { chainId } = useContext(NetworkContext);
   const [currentLink, setCurrentLink] = useState(null);
   const [ethBalance, setEthBalance] = useState(null);
   const [tokenAddress, setTokenAddress] = useState("");
@@ -101,12 +100,18 @@ const Payment = ({ address }) => {
     setIsDisperseSuccessful(false);
     try {
       const { ethereum } = window;
-      if (ethereum && tokenAddress !== "" && total) {
+      if (
+        ethereum &&
+        tokenAddress !== "" &&
+        total &&
+        disperseAddresses[chainId]
+      ) {
         const provider = new ethers.providers.Web3Provider(window.ethereum);
         const signer = provider.getSigner();
         const erc20 = new ethers.Contract(tokenAddress, ERC20.abi, signer);
 
-        const approve = await erc20.approve(DISPERSE_ADDRESS, total);
+        const disperseAddress = disperseAddresses[chainId];
+        const approve = await erc20.approve(disperseAddress, total);
         if (approve) {
           setIsApproved(true);
         }
@@ -119,11 +124,18 @@ const Payment = ({ address }) => {
   const disperse = async () => {
     try {
       const { ethereum } = window;
-      if (ethereum && tokenAddress !== "" && recipientsData.length > 0) {
+      if (
+        ethereum &&
+        tokenAddress !== "" &&
+        recipientsData.length > 0 &&
+        disperseAddresses[chainId]
+      ) {
         const provider = new ethers.providers.Web3Provider(window.ethereum);
         const signer = provider.getSigner();
+        const disperseAddress = disperseAddresses[chainId];
+
         const disperse = new ethers.Contract(
-          DISPERSE_ADDRESS,
+          disperseAddress,
           Disperse.abi,
           signer
         );

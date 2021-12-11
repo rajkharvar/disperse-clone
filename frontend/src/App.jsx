@@ -1,5 +1,5 @@
-import { ethers, providers } from "ethers";
-import { useEffect, useState } from "react";
+import { ethers } from "ethers";
+import { createContext, useEffect, useReducer, useState } from "react";
 import "./App.css";
 import Header from "./components/Headers";
 import Payment from "./components/Payment";
@@ -7,14 +7,27 @@ import WalletInfo from "./components/WalletInfo";
 import Warn from "./components/Warn";
 import Web3Modal from "web3modal";
 import Connect from "./components/Connect";
+import { initState, reducer } from "./reducers/index";
+
+export const NetworkContext = createContext();
 
 function App() {
   const [isMetamaskConnected, setIsMetamaskConnected] = useState();
   const [isMetamaskInstalled, setIsMetamaskInstalled] = useState();
-  const [chainId, setChainId] = useState(null);
-  const [networkName, setNetworkName] = useState(null);
   const [address, setAddress] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [state, dispatch] = useReducer(reducer, initState);
+
+  useEffect(() => {
+    if (window.ethereum) {
+      window.ethereum.on("chainChanged", () => {
+        window.location.reload();
+      });
+      window.ethereum.on("accountsChanged", () => {
+        window.location.reload();
+      });
+    }
+  });
 
   const fetchNetworkDetails = async () => {
     try {
@@ -23,8 +36,9 @@ function App() {
       const { chainId, name } = await provider.getNetwork();
       const signer = await provider.getSigner();
       const address = await signer.getAddress();
-      setChainId(chainId);
-      setNetworkName(name);
+
+      dispatch({ type: "SET_CHAIN_ID", payload: chainId });
+      dispatch({ type: "SET_NETWORK", payload: name });
       setAddress(address);
       setIsLoading(false);
     } catch (error) {
@@ -67,18 +81,25 @@ function App() {
   }, []);
   return (
     <div className="mx-48 px-48 pt-28">
-      <Header address={address} />
-      {isMetamaskInstalled ? (
-        !isMetamaskConnected && <Connect connect={connect} />
-      ) : (
-        <Warn />
-      )}
-      {!isLoading && address && (
-        <>
-          <WalletInfo address={address} />
-          <Payment address={address} />
-        </>
-      )}
+      <NetworkContext.Provider
+        value={{
+          chainId: state.chainId,
+          network: state.network,
+        }}
+      >
+        <Header address={address} />
+        {isMetamaskInstalled ? (
+          !isMetamaskConnected && <Connect connect={connect} />
+        ) : (
+          <Warn />
+        )}
+        {!isLoading && address && (
+          <>
+            <WalletInfo address={address} />
+            <Payment address={address} />
+          </>
+        )}
+      </NetworkContext.Provider>
     </div>
   );
 }
