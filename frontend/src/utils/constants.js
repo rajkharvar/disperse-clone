@@ -23,3 +23,6 @@ export const disperseAddresses = {
     import.meta.VITE_DISPERSE_MATIC_MUMBAI ||
     "0xfBc1E33C3459082e9d04D51F182aE9a66A0cE070",
 };
+
+export const warnMessage =
+  "*Supports ropsten, rinkeby, goerli, kovan and mumbai(matic)*";

@@ -5,7 +5,7 @@ import Disperse from "../artifacts/Disperse.json";
 import Confirm from "./Confirm";
 import Recipients from "./Recipients";
 import { NetworkContext } from "../App";
-import { disperseAddresses } from "../utils/constants";
+import { disperseAddresses, warnMessage } from "../utils/constants";
 
 const Payment = ({ address }) => {
   const { chainId } = useContext(NetworkContext);
@@ -24,6 +24,7 @@ const Payment = ({ address }) => {
   const [remaining, setRemaining] = useState(null);
   const [isApproved, setIsApproved] = useState(false);
   const [isDisperseSuccessful, setIsDisperseSuccessful] = useState(false);
+  const [warn, setWarn] = useState(null);
 
   const getEthBalance = async (ethereum) => {
     if (!ethBalance) {
@@ -50,6 +51,10 @@ const Payment = ({ address }) => {
           symbol,
           balance: ethers.utils.formatEther(balance),
         });
+      }
+
+      if (!disperseAddresses[chainId]) {
+        setWarn(warnMessage);
       }
     } catch (error) {
       console.log(error);
@@ -152,8 +157,6 @@ const Payment = ({ address }) => {
         if (disperseToken) {
           setIsDisperseSuccessful(true);
         }
-
-        // const disperseToken = await disperse.
       }
     } catch (error) {
       console.log(error);
@@ -257,11 +260,14 @@ const Payment = ({ address }) => {
                 <span className="pt-1 text-xs">{tokenDetails.symbol}</span> (
                 {tokenDetails.name})
               </p>
-              <Recipients
-                tokenSymbol={tokenDetails.symbol}
-                textValue={textValue}
-                setTextValue={setTextValue}
-              />
+              {warn && <p className="italic text-red-400">{warn}</p>}
+              {!warn && (
+                <Recipients
+                  tokenSymbol={tokenDetails.symbol}
+                  textValue={textValue}
+                  setTextValue={setTextValue}
+                />
+              )}
               {recipientsData.length > 0 && (
                 <Confirm
                   recipientsData={recipientsData}
