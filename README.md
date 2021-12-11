@@ -1,6 +1,7 @@
-# Basic Sample Hardhat Project
+# Disperse app clone
 
-This project demonstrates a basic Hardhat use case. It comes with a sample contract, a test for that contract, a sample script that deploys that contract, and an example of a task implementation, which simply lists the available accounts.
+Disperse app let you disperse any erc20 tokens to number of addresses using single contract call.
+Currently supports - ropsten, rinkeby, goerli, kovan and mumbai(matic).
 
 Try running some of the following tasks:
 
