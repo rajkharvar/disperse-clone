@@ -1,4 +1,5 @@
 require("@nomiclabs/hardhat-waffle");
+require("@nomiclabs/hardhat-etherscan");
 require("dotenv").config();
 const fs = require("fs");
 const MUMBAI_RPC = process.env.MUMBAI_RPC;
@@ -6,8 +7,12 @@ const ROPSTEN_RPC = process.env.ROPSTEN_RPC;
 const RINKEBY_RPC = process.env.RINKEBY_RPC;
 const GOERLI_RPC = process.env.GOERLI_RPC;
 const KOVAN_RPC = process.env.KOVAN_RPC;
+const ETHERSCAN_KEY = process.env.ETHERSCAN_KEY;
 const privateKey = fs.readFileSync(".privateKey").toString();
 
+/**
+ * @type import('hardhat/config').HardhatUserConfig
+ */
 module.exports = {
   solidity: "0.8.4",
   defaultNetwork: "hardhat",
@@ -35,5 +40,8 @@ module.exports = {
       url: MUMBAI_RPC,
       accounts: [privateKey],
     },
+  },
+  etherscan: {
+    apiKey: ETHERSCAN_KEY,
   },
 };
