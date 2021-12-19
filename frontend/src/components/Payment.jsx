@@ -6,6 +6,8 @@ import Confirm from "./Confirm";
 import Recipients from "./Recipients";
 import { NetworkContext } from "../App";
 import { disperseAddresses, warnMessage } from "../utils/constants";
+import { parseText } from "../utils/index";
+import Ether from "./Ether";
 
 const Payment = ({ address }) => {
   const { chainId } = useContext(NetworkContext);
@@ -69,36 +71,6 @@ const Payment = ({ address }) => {
       getEthBalance(ethereum);
     }
   }, [currentLink]);
-
-  const isValidAddress = (address) => ethers.utils.isAddress(address);
-
-  const isValidValue = (value) => {
-    try {
-      return ethers.utils.parseUnits(value, "ether");
-    } catch (err) {
-      return false;
-    }
-  };
-
-  const parseText = () => {
-    const lines = textValue.split("\n");
-    let updatedRecipients = [];
-
-    lines.map((line) => {
-      if (line.includes("=")) {
-        const [address, value] = line.split("=");
-        const validValue = isValidValue(value);
-        if (isValidAddress(address) && validValue) {
-          updatedRecipients.push({
-            address,
-            value: validValue,
-          });
-        }
-      }
-    });
-
-    setRecipientsData(updatedRecipients);
-  };
 
   const approve = async () => {
     setIsApproved(false);
@@ -165,7 +137,8 @@ const Payment = ({ address }) => {
 
   useEffect(() => {
     if (textValue !== "") {
-      parseText();
+      const updatedRecipients = parseText(textValue);
+      setRecipientsData(updatedRecipients);
     }
   }, [textValue]);
 
@@ -216,11 +189,7 @@ const Payment = ({ address }) => {
         </span>
       </h3>
 
-      {currentLink === "ether" && (
-        <p className="pt-4 text-l font-light italic">
-          you have {ethBalance} <span className="pt-1 text-sm">ETH</span>
-        </p>
-      )}
+      {currentLink === "ether" && <Ether address={address} />}
       {currentLink === "token" && (
         <div className="mt-12 mb-24">
           <h3 className="text-2xl font-light italic">token address</h3>
