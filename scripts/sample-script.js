@@ -32,11 +32,17 @@ const logBalance = async (aliceContract, address) => {
   console.log(`${address} has ${balance} ALICE token`);
 };
 
+const logAddressBalance = async (address, provider) => {
+  const balance = await provider.getBalance(address);
+  console.log(`${address} has ${hre.ethers.utils.formatEther(balance)} ether`);
+};
+
 async function main() {
   const [aliceSigner, bobSigner] = await hre.ethers.getSigners();
   const Alice = await hre.ethers.getContractFactory("Alice");
   const Disperse = await hre.ethers.getContractFactory("Disperse");
   const alice = await Alice.deploy("Alice", "ALICE");
+  const provider = new ethers.providers.JsonRpcProvider();
 
   await alice.deployed();
   const totalSupply = await alice.totalSupply();
@@ -61,6 +67,28 @@ async function main() {
   await Promise.all(
     recipients.map(async (add) => {
       await logBalance(alice, add);
+    })
+  );
+
+  // * Disperse ethers
+
+  // Log recipients ether balance before disperse
+  console.log("Ether balance of address before disperse");
+  await Promise.all(
+    recipients.map(async (recipient) => {
+      await logAddressBalance(recipient, provider);
+    })
+  );
+
+  const disperseEther = await disperse.disperseEther(recipients, values, {
+    value: BigNumber.from(150).mul(ETHER),
+  });
+  await disperseEther.wait();
+
+  console.log("Ether balance of address after disperse");
+  await Promise.all(
+    recipients.map(async (recipient) => {
+      await logAddressBalance(recipient, provider);
     })
   );
 }

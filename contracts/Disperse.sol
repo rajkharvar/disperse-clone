@@ -20,4 +20,15 @@ contract Disperse {
             token.transfer(recipients[i], values[i]);
         }
     }
+
+    function disperseEther(address[] memory recipients, uint256[] memory values)
+        external
+        payable
+    {
+        for (uint256 i = 0; i < recipients.length; i++)
+            payable(recipients[i]).transfer(values[i]);
+        uint256 balance = address(this).balance;
+        // Refund remaining amount to msg.sender
+        if (balance > 0) payable(msg.sender).transfer(balance);
+    }
 }
