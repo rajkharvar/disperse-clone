@@ -10,7 +10,7 @@ const Recipients = ({ tokenSymbol, textValue, setTextValue }) => {
         spellCheck="false"
         value={textValue}
         onChange={(e) => setTextValue(e.target.value)}
-        className="block border-b-2 border-black outline-none px-2 py-2 h-32"
+        className="block border-b-2 border-black outline-none px-2 py-2 mt-4 h-32"
         style={{
           width: "100%",
           background: "aquamarine",
