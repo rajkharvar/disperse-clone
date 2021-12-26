@@ -24,5 +24,13 @@ export const disperseAddresses = {
     "0xaf6f4A737188571d128477DEe81d54Bc63De6d80",
 };
 
+export const scans = {
+  3: "https://ropsten.etherscan.io/",
+  4: "https://rinkeby.etherscan.io/",
+  5: "https://goerli.etherscan.io/",
+  42: "https://kovan.etherscan.io/",
+  80001: "https://mumbai.polygonscan.com/",
+};
+
 export const warnMessage =
   "*Supports ropsten, rinkeby, goerli, kovan and mumbai(matic)*";
