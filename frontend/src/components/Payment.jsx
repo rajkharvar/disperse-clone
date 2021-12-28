@@ -24,9 +24,9 @@ const Payment = ({ address }) => {
   const [recipientsData, setRecipientsData] = useState([]);
   const [total, setTotal] = useState(null);
   const [remaining, setRemaining] = useState(null);
-  const [isApproved, setIsApproved] = useState(false);
-  const [isDisperseSuccessful, setIsDisperseSuccessful] = useState(false);
   const [warn, setWarn] = useState(null);
+  const [txStatus, setTxStatus] = useState(null);
+  const [approveStatus, setApproveStatus] = useState(null);
 
   const getEthBalance = async (ethereum) => {
     if (!ethBalance) {
@@ -73,8 +73,7 @@ const Payment = ({ address }) => {
   }, [currentLink]);
 
   const approve = async () => {
-    setIsApproved(false);
-    setIsDisperseSuccessful(false);
+    setApproveStatus(null);
     try {
       const { ethereum } = window;
       if (
@@ -88,10 +87,17 @@ const Payment = ({ address }) => {
         const erc20 = new ethers.Contract(tokenAddress, ERC20.abi, signer);
 
         const disperseAddress = disperseAddresses[chainId];
-        const approve = await erc20.approve(disperseAddress, total);
-        if (approve) {
-          setIsApproved(true);
-        }
+        const txn = await erc20.approve(disperseAddress, total);
+        setApproveStatus({
+          status: "pending",
+          hash: txn.hash,
+        });
+
+        await txn.wait();
+        setApproveStatus({
+          status: "success",
+          hash: txn.hash,
+        });
       }
     } catch (error) {
       console.log(error);
@@ -120,15 +126,21 @@ const Payment = ({ address }) => {
         const recipients = recipientsData.map((recipient) => recipient.address);
         const values = recipientsData.map((recipient) => recipient.value);
 
-        const disperseToken = await disperse.disperseToken(
+        const txn = await disperse.disperseToken(
           tokenAddress,
           recipients,
           values
         );
+        setTxStatus({
+          status: "pending",
+          hash: txn.hash,
+        });
 
-        if (disperseToken) {
-          setIsDisperseSuccessful(true);
-        }
+        await txn.wait();
+        setTxStatus({
+          status: "success",
+          hash: txn.hash,
+        });
       }
     } catch (error) {
       console.log(error);
@@ -244,9 +256,9 @@ const Payment = ({ address }) => {
                   tokenBalance={tokenDetails.balance}
                   remaining={remaining}
                   approve={approve}
-                  isApproved={isApproved}
                   disperse={disperse}
-                  isDisperseSuccessful={isDisperseSuccessful}
+                  txStatus={txStatus}
+                  approveStatus={approveStatus}
                 />
               )}
             </>

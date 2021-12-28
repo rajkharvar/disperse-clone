@@ -1,7 +1,7 @@
 import { ethers } from "ethers";
-import { useEffect, useState, useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { NetworkContext } from "../App";
-import { scans } from "../utils/constants";
+import Status from "./Status";
 
 const ConfirmEther = ({
   recipientsData,
@@ -83,18 +83,7 @@ const ConfirmEther = ({
               disperse ether
             </button>
             {isDisabled && <p className="ml-4 italic">total exceeds balance</p>}
-            {txStatus && (
-              <div className="flex flex-col ml-4">
-                <p className="text-sm">transaction {txStatus.status}</p>
-                <a
-                  href={`${scans[chainId]}tx/${txStatus.hash}`}
-                  target="_blank"
-                  className="text-xs border-gray-600 border-b-2"
-                >
-                  {txStatus.hash}
-                </a>
-              </div>
-            )}
+            {txStatus && <Status txnStatus={txStatus} />}
           </div>
         </div>
       )}
