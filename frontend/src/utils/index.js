@@ -11,7 +11,6 @@ export const isValidValue = (value) => {
 };
 
 export const parseText = (textValue) => {
-  console.log(textValue);
   const lines = textValue.split("\n");
   let updatedRecipients = [];
 

@@ -1,5 +1,6 @@
 import { ethers } from "ethers";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import Status from "./Status";
 
 const Confirm = ({
   recipientsData,
@@ -7,9 +8,9 @@ const Confirm = ({
   tokenBalance,
   remaining,
   approve,
-  isApproved,
   disperse,
-  isDisperseSuccessful,
+  txStatus,
+  approveStatus,
 }) => {
   const [isDisabled, setIsDisabled] = useState(false);
 
@@ -82,7 +83,7 @@ const Confirm = ({
             Approve
           </button>
           {isDisabled && <p className="ml-4 italic">total exceeds balance</p>}
-          {isApproved && <p className="ml-4">Token approved</p>}
+          {approveStatus && <Status txnStatus={approveStatus} />}
         </div>
         <div className="mt-6 flex items-center">
           <button
@@ -99,9 +100,7 @@ const Confirm = ({
             disperse token
           </button>
           {isDisabled && <p className="ml-4 italic">total exceeds balance</p>}
-          {isDisperseSuccessful && (
-            <p className="ml-4">Disperse token successful 🎉</p>
-          )}
+          {txStatus && <Status txnStatus={txStatus} />}
         </div>
       </div>
     </div>

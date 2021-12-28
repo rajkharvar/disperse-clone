@@ -1,5 +1,7 @@
 import { ethers } from "ethers";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { NetworkContext } from "../App";
+import Status from "./Status";
 
 const ConfirmEther = ({
   recipientsData,
@@ -7,9 +9,10 @@ const ConfirmEther = ({
   tokenBalance,
   remaining,
   disperse,
-  isDisperseSuccessful,
+  txStatus,
 }) => {
   const [isDisabled, setIsDisabled] = useState(false);
+  const { chainId } = useContext(NetworkContext);
 
   useEffect(() => {
     if (total && tokenBalance) {
@@ -80,9 +83,7 @@ const ConfirmEther = ({
               disperse ether
             </button>
             {isDisabled && <p className="ml-4 italic">total exceeds balance</p>}
-            {isDisperseSuccessful && (
-              <p className="ml-4">Disperse token successful 🎉</p>
-            )}
+            {txStatus && <Status txnStatus={txStatus} />}
           </div>
         </div>
       )}

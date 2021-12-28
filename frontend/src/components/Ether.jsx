@@ -14,8 +14,8 @@ const Ether = ({ address }) => {
   const [total, setTotal] = useState(null);
   const [recipientsData, setRecipientsData] = useState([]);
   const [remaining, setRemaining] = useState(null);
-  const [isDisperseSuccessful, setIsDisperseSuccessful] = useState(false);
   const { chainId } = useContext(NetworkContext);
+  const [txStatus, setTxStatus] = useState(null);
 
   const getEthBalance = async () => {
     const { ethereum } = window;
@@ -49,6 +49,7 @@ const Ether = ({ address }) => {
 
   const disperseEther = async () => {
     try {
+      setTxStatus(null);
       const { ethereum } = window;
       if (ethereum && disperseAddresses[chainId]) {
         const provider = new ethers.providers.Web3Provider(ethereum);
@@ -67,10 +68,16 @@ const Ether = ({ address }) => {
         const txn = await disperseContract.disperseEther(recipients, values, {
           value: total,
         });
+        setTxStatus({
+          hash: txn.hash,
+          status: "pending",
+        });
         await txn.wait();
-        setIsDisperseSuccessful(true);
+        setTxStatus({
+          hash: txn.hash,
+          status: "success",
+        });
         console.log("Completed dispersing ether");
-        console.log(txn);
       }
     } catch (error) {
       console.log("error occured while dispersing ether");
@@ -103,7 +110,7 @@ const Ether = ({ address }) => {
           disperse={disperseEther}
           tokenBalance={ethBalance}
           remaining={remaining}
-          isDisperseSuccessful={isDisperseSuccessful}
+          txStatus={txStatus}
         />
       )}
     </p>
