@@ -10,6 +10,7 @@
     "hardhat": "^2.7.0"
   },
   "scripts": {
+    "cp-env": "cp .env.tpl .env",
     "test": "npx hardhat test"
   },
   "dependencies": {
