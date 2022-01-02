@@ -8,7 +8,7 @@ const RINKEBY_RPC = process.env.RINKEBY_RPC;
 const GOERLI_RPC = process.env.GOERLI_RPC;
 const KOVAN_RPC = process.env.KOVAN_RPC;
 const ETHERSCAN_KEY = process.env.ETHERSCAN_KEY;
-const privateKey = fs.readFileSync(".privateKey").toString();
+const privateKey = process.env.PRIVATE_KEY;
 
 /**
  * @type import('hardhat/config').HardhatUserConfig
