@@ -1,6 +1,6 @@
 # Disperse app clone
 
-Disperse app let you disperse any erc20 tokens to number of addresses using single contract call.
+Disperse app let you disperse any erc20 tokens or ethers to number of addresses using single contract call.
 Currently supports - ropsten, rinkeby, goerli, kovan and mumbai(matic).
 
 Try running some of the following tasks:
