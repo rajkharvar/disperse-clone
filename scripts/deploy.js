@@ -3,25 +3,11 @@
 //
 // When running the script with `npx hardhat run <script>` you'll find the Hardhat
 // Runtime Environment's members available in the global scope.
-const { BigNumber } = require("@ethersproject/bignumber");
 const hre = require("hardhat");
-const { ethers } = require("hardhat");
-
-const ETHER = BigNumber.from(10).pow(BigNumber.from(18));
-
-const getTokenValue = (value) => BigNumber.from(value).mul(ETHER);
 
 async function main() {
-  const [aliceSigner, bobSigner] = await hre.ethers.getSigners();
-  const Alice = await hre.ethers.getContractFactory("Alice");
   const Disperse = await hre.ethers.getContractFactory("Disperse");
-  const alice = await Alice.deploy("Alice", "ALICE");
 
-  await alice.deployed();
-  const totalSupply = await alice.totalSupply();
-
-  console.log(`Alice Token address: ${alice.address}`);
-  console.log(`TotalSupply: ${ethers.utils.formatEther(totalSupply)}`);
   const disperse = await Disperse.deploy();
 
   await disperse.deployed();

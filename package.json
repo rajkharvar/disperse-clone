@@ -9,6 +9,9 @@
     "ethers": "^5.5.2",
     "hardhat": "^2.7.0"
   },
+  "scripts": {
+    "test": "npx hardhat test"
+  },
   "dependencies": {
     "@openzeppelin/contracts": "^4.4.0",
     "dotenv": "^10.0.0"
