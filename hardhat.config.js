@@ -7,6 +7,7 @@ const ROPSTEN_RPC = process.env.ROPSTEN_RPC;
 const RINKEBY_RPC = process.env.RINKEBY_RPC;
 const GOERLI_RPC = process.env.GOERLI_RPC;
 const KOVAN_RPC = process.env.KOVAN_RPC;
+const SKALE_RPC = process.env.SKALE_RPC;
 const ETHERSCAN_KEY = process.env.ETHERSCAN_KEY;
 const privateKey = process.env.PRIVATE_KEY;
 
@@ -14,8 +15,16 @@ const privateKey = process.env.PRIVATE_KEY;
  * @type import('hardhat/config').HardhatUserConfig
  */
 module.exports = {
-  solidity: "0.8.4",
   defaultNetwork: "hardhat",
+  solidity: {
+    version: "0.8.0",
+    settings: {
+      optimizer: {
+        enabled: true,
+        runs: 200,
+      },
+    },
+  },
   networks: {
     hardhat: {
       chainId: 1337,
@@ -39,6 +48,11 @@ module.exports = {
     mumbai: {
       url: MUMBAI_RPC,
       accounts: [privateKey],
+    },
+    skale: {
+      url: SKALE_RPC,
+      accounts: [privateKey],
+      gasPrice: 100000,
     },
   },
   etherscan: {
