@@ -15,6 +15,7 @@ const privateKey = process.env.PRIVATE_KEY;
  * @type import('hardhat/config').HardhatUserConfig
  */
 module.exports = {
+  defaultNetwork: "hardhat",
   solidity: {
     version: "0.8.0",
     settings: {
