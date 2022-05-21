@@ -8,6 +8,7 @@ const RINKEBY_RPC = process.env.RINKEBY_RPC;
 const GOERLI_RPC = process.env.GOERLI_RPC;
 const KOVAN_RPC = process.env.KOVAN_RPC;
 const SKALE_RPC = process.env.SKALE_RPC;
+const SKALE_RPC_V2 = process.env.SKALE_RPC_V2;
 const ETHERSCAN_KEY = process.env.ETHERSCAN_KEY;
 const privateKey = process.env.PRIVATE_KEY;
 
@@ -53,6 +54,10 @@ module.exports = {
       url: SKALE_RPC,
       accounts: [privateKey],
       gasPrice: 100000,
+    },
+    skaleTestnetV2: {
+      url: SKALE_RPC_V2,
+      accounts: [privateKey],
     },
   },
   etherscan: {
