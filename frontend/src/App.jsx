@@ -38,8 +38,8 @@ function App() {
       const signer = await provider.getSigner();
       const address = await signer.getAddress();
 
-      if (chainId === chains.skale) {
-        dispatch({ type: "SET_NETWORK", payload: "skale" });
+      if (chainId === chains.skaleTestnetV2) {
+        dispatch({ type: "SET_NETWORK", payload: "Skale Testnet v2" });
       } else {
         dispatch({ type: "SET_NETWORK", payload: name });
       }
