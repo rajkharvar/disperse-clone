@@ -17,8 +17,8 @@ const Recipients = ({ tokenSymbol, textValue, setTextValue }) => {
           color: "black",
         }}
         placeholder="0x2b1F577230F4D72B3818895688b66abD9701B4dC=1.41421
-        0x2b1F577230F4D72B3818895688b66abD9701B4dC=1.41421
-        0x2b1F577230F4D72B3818895688b66abD9701B4dC=1.41421"
+        0x2b1F577230F4D72B3818895688b66abD9701B4dC 1.41421
+        0x2b1F577230F4D72B3818895688b66abD9701B4dC,1.41421"
       ></textarea>
     </div>
   );
