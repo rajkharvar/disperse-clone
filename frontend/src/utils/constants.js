@@ -5,6 +5,7 @@ export const chains = {
   kovan: 42,
   maticmum: 80001,
   skale: 416452918254875,
+  razorSchain: 278611351,
 };
 
 export const disperseAddresses = {
@@ -29,6 +30,9 @@ export const disperseAddresses = {
   132333505628089:
     import.meta.VITE_DISPERSE_SKALE_V2 ||
     "0x73c0F3cf9Bae32c6A88aD4bc701b1C9aDC1E57d5",
+  278611351:
+    import.meta.VITE_RAZOR_SCHAIN ||
+    "0x3bAB943FE31B0F90c1E4c2733113E336eBAC4Bc1",
 };
 
 export const scans = {
@@ -40,6 +44,7 @@ export const scans = {
   416452918254875: "http://faint-acubens.explorer.dappnet.skalenodes.com/",
   132333505628089:
     "https://whispering-turais.explorer.staging-v2.skalenodes.com/",
+  278611351: "https://turbulent-unique-scheat.explorer.mainnet.skalenodes.com/",
 };
 
 export const warnMessage =
