@@ -15,8 +15,13 @@ export const parseText = (textValue) => {
   let updatedRecipients = [];
 
   lines.map((line) => {
-    if (line.includes(" ") || line.includes(",") || line.includes("=")) {
-      const [address, value] = line.split(/[,= ]+/);
+    if (
+      line.includes(" ") ||
+      line.includes(",") ||
+      line.includes("=") ||
+      line.includes("\t")
+    ) {
+      const [address, value] = line.split(/[,= \t]+/);
       const validValue = isValidValue(value);
       if (isValidAddress(address) && validValue) {
         updatedRecipients.push({
