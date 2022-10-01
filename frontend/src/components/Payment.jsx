@@ -208,12 +208,12 @@ const Payment = ({ address }) => {
           <div className="flex mt-6">
             <input
               type="text"
-              className="text-l py-2 px-1 border-b-2 border-black outline-none"
+              className="text-l py-2 px-1 border-b-2 border-black outline-none max-w-3xl"
               placeholder="0x2b1F577230F4D72B3818895688b66abD9701B4dC"
               value={tokenAddress}
               onChange={(e) => setTokenAddress(e.target.value)}
               style={{
-                width: "80%",
+                width: "100%",
                 background: "aquamarine",
                 color: "#768882",
               }}
