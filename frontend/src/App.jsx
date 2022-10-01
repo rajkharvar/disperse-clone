@@ -1,14 +1,15 @@
 import { ethers } from "ethers";
 import { createContext, useEffect, useReducer, useState } from "react";
+
 import "./App.css";
 import Header from "./components/Headers";
 import Payment from "./components/Payment";
 import WalletInfo from "./components/WalletInfo";
 import Warn from "./components/Warn";
-import Web3Modal, { CHAIN_DATA_LIST } from "web3modal";
+import Web3Modal from "web3modal";
 import Connect from "./components/Connect";
 import { initState, reducer } from "./reducers/index";
-import { chains } from "./utils/constants";
+import { chains, disperseAddresses } from "./utils/constants";
 
 export const NetworkContext = createContext();
 
@@ -37,14 +38,20 @@ function App() {
       const { chainId, name } = await provider.getNetwork();
       const signer = await provider.getSigner();
       const address = await signer.getAddress();
+      const isChainSupported = disperseAddresses[chainId];
 
-      if (chainId === chains.skale) {
-        dispatch({ type: "SET_NETWORK", payload: "skale" });
-      } else if (chainId === chains.razorSchain) {
-        dispatch({ type: "SET_NETWORK", payload: "Razor Schain" });
+      if (!isChainSupported) {
+        dispatch({ type: "SET_NETWORK", payload: null });
       } else {
-        dispatch({ type: "SET_NETWORK", payload: name });
+        if (chainId === chains.skale) {
+          dispatch({ type: "SET_NETWORK", payload: "skale" });
+        } else if (chainId === chains.razorSchain) {
+          dispatch({ type: "SET_NETWORK", payload: "Razor Schain" });
+        } else {
+          dispatch({ type: "SET_NETWORK", payload: name });
+        }
       }
+
       dispatch({ type: "SET_CHAIN_ID", payload: chainId });
       setAddress(address);
       setIsLoading(false);
