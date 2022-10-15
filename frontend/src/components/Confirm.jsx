@@ -80,7 +80,7 @@ const Confirm = ({
             }}
             disabled={isDisabled}
           >
-            Approve
+            approve
           </button>
           {isDisabled && <p className="ml-4 italic">total exceeds balance</p>}
           {approveStatus && <Status txnStatus={approveStatus} />}

@@ -10,15 +10,16 @@ import { parseText } from "../utils/index";
 import Ether from "./Ether";
 
 const Payment = ({ address }) => {
+  const defaultTokenDetails = {
+    name: null,
+    symbol: null,
+    balance: null,
+  };
   const { chainId } = useContext(NetworkContext);
   const [currentLink, setCurrentLink] = useState(null);
   const [ethBalance, setEthBalance] = useState(null);
   const [tokenAddress, setTokenAddress] = useState("");
-  const [tokenDetails, setTokenDetails] = useState({
-    name: null,
-    symbol: null,
-    balance: null,
-  });
+  const [tokenDetails, setTokenDetails] = useState(defaultTokenDetails);
   const [textValue, setTextValue] = useState("");
   const [isTokenLoading, setIsTokenLoading] = useState(false);
   const [recipientsData, setRecipientsData] = useState([]);
@@ -27,6 +28,7 @@ const Payment = ({ address }) => {
   const [warn, setWarn] = useState(null);
   const [txStatus, setTxStatus] = useState(null);
   const [approveStatus, setApproveStatus] = useState(null);
+  const [isInvalidToken, setIsInvalidToken] = useState(false);
 
   const getEthBalance = async (ethereum) => {
     if (!ethBalance) {
@@ -38,6 +40,8 @@ const Payment = ({ address }) => {
   };
 
   const loadToken = async () => {
+    setIsInvalidToken(false);
+    setTokenDetails(defaultTokenDetails);
     try {
       setIsTokenLoading(true);
       const { ethereum } = window;
@@ -59,6 +63,7 @@ const Payment = ({ address }) => {
         setWarn(warnMessage);
       }
     } catch (error) {
+      setIsInvalidToken(true);
       console.log(error);
     } finally {
       setIsTokenLoading(false);
@@ -208,12 +213,12 @@ const Payment = ({ address }) => {
           <div className="flex mt-6">
             <input
               type="text"
-              className="text-l py-2 px-1 border-b-2 border-black outline-none"
+              className="text-l py-2 px-1 border-b-2 border-black outline-none max-w-3xl"
               placeholder="0x2b1F577230F4D72B3818895688b66abD9701B4dC"
               value={tokenAddress}
               onChange={(e) => setTokenAddress(e.target.value)}
               style={{
-                width: "80%",
+                width: "100%",
                 background: "aquamarine",
                 color: "#768882",
               }}
@@ -232,6 +237,11 @@ const Payment = ({ address }) => {
           {isTokenLoading && (
             <p className="pt-4 text-l font-light italic">
               loading token info ...
+            </p>
+          )}
+          {isInvalidToken && (
+            <p className="pt-4 text-l font-light text-red-400 italic">
+              unsupported token
             </p>
           )}
           {!isTokenLoading && tokenDetails.name && (
