@@ -43,9 +43,7 @@ function App() {
       if (!isChainSupported) {
         dispatch({ type: "SET_NETWORK", payload: null });
       } else {
-        if (chainId === chains.skale) {
-          dispatch({ type: "SET_NETWORK", payload: "skale" });
-        } else if (chainId === chains.razorSchain) {
+        if (chainId === chains.razorSchain) {
           dispatch({ type: "SET_NETWORK", payload: "Razor Schain" });
         } else {
           dispatch({ type: "SET_NETWORK", payload: name });
