@@ -5,8 +5,7 @@ import Disperse from "../artifacts/Disperse.json";
 import Confirm from "./Confirm";
 import Recipients from "./Recipients";
 import { NetworkContext } from "../App";
-import { disperseAddresses, warnMessage } from "../utils/constants";
-import { parseText } from "../utils/index";
+import { getNetworkInfo, parseText, getWarnMessage } from "../utils/index";
 import Ether from "./Ether";
 
 const Payment = ({ address }) => {
@@ -29,6 +28,8 @@ const Payment = ({ address }) => {
   const [txStatus, setTxStatus] = useState(null);
   const [approveStatus, setApproveStatus] = useState(null);
   const [isInvalidToken, setIsInvalidToken] = useState(false);
+  const networkInfo = getNetworkInfo(chainId);
+  const disperseAddress = networkInfo?.disperseAddress;
 
   const getEthBalance = async (ethereum) => {
     if (!ethBalance) {
@@ -59,7 +60,8 @@ const Payment = ({ address }) => {
         });
       }
 
-      if (!disperseAddresses[chainId]) {
+      if (!networkInfo) {
+        const warnMessage = getWarnMessage();
         setWarn(warnMessage);
       }
     } catch (error) {
@@ -81,17 +83,11 @@ const Payment = ({ address }) => {
     setApproveStatus(null);
     try {
       const { ethereum } = window;
-      if (
-        ethereum &&
-        tokenAddress !== "" &&
-        total &&
-        disperseAddresses[chainId]
-      ) {
+      if (ethereum && tokenAddress !== "" && total && disperseAddress) {
         const provider = new ethers.providers.Web3Provider(window.ethereum);
         const signer = provider.getSigner();
         const erc20 = new ethers.Contract(tokenAddress, ERC20.abi, signer);
 
-        const disperseAddress = disperseAddresses[chainId];
         const txn = await erc20.approve(disperseAddress, total);
         setApproveStatus({
           status: "pending",
@@ -116,11 +112,10 @@ const Payment = ({ address }) => {
         ethereum &&
         tokenAddress !== "" &&
         recipientsData.length > 0 &&
-        disperseAddresses[chainId]
+        disperseAddress
       ) {
         const provider = new ethers.providers.Web3Provider(window.ethereum);
         const signer = provider.getSigner();
-        const disperseAddress = disperseAddresses[chainId];
 
         const disperse = new ethers.Contract(
           disperseAddress,

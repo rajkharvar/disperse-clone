@@ -2,11 +2,10 @@ import { useState, useEffect, useContext } from "react";
 import { ethers } from "ethers";
 
 import Disperse from "../artifacts/Disperse.json";
-import { parseText } from "../utils/index";
+import { getNetworkInfo, parseText } from "../utils/index";
 import Recipients from "./Recipients";
 import ConfirmEther from "./ConfirmEther";
 import { NetworkContext } from "../App";
-import { disperseAddresses } from "../utils/constants";
 
 const Ether = ({ address }) => {
   const [ethBalance, setEthBalance] = useState(null);
@@ -16,6 +15,8 @@ const Ether = ({ address }) => {
   const [remaining, setRemaining] = useState(null);
   const { chainId } = useContext(NetworkContext);
   const [txStatus, setTxStatus] = useState(null);
+  const networkInfo = getNetworkInfo(chainId);
+  const disperseAddress = networkInfo?.disperseAddress;
 
   const getEthBalance = async () => {
     const { ethereum } = window;
@@ -51,11 +52,11 @@ const Ether = ({ address }) => {
     try {
       setTxStatus(null);
       const { ethereum } = window;
-      if (ethereum && disperseAddresses[chainId]) {
+      if (ethereum && disperseAddress) {
         const provider = new ethers.providers.Web3Provider(ethereum);
         const signer = provider.getSigner();
         const disperseContract = new ethers.Contract(
-          disperseAddresses[chainId],
+          disperseAddress,
           Disperse.abi,
           signer
         );
