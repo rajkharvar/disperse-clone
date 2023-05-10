@@ -9,7 +9,7 @@ import Warn from "./components/Warn";
 import Web3Modal from "web3modal";
 import Connect from "./components/Connect";
 import { initState, reducer } from "./reducers/index";
-import { chains, disperseAddresses } from "./utils/constants";
+import { getNetworkInfo, isChainSupported } from "./utils";
 
 export const NetworkContext = createContext();
 
@@ -35,18 +35,16 @@ function App() {
     try {
       const { ethereum } = window;
       const provider = new ethers.providers.Web3Provider(ethereum);
-      const { chainId, name } = await provider.getNetwork();
-      const signer = await provider.getSigner();
+      const { chainId } = await provider.getNetwork();
+      const signer = provider.getSigner();
       const address = await signer.getAddress();
-      const isChainSupported = disperseAddresses[chainId];
 
-      if (!isChainSupported) {
+      if (!isChainSupported(chainId)) {
         dispatch({ type: "SET_NETWORK", payload: null });
       } else {
-        if (chainId === chains.razorSchain) {
-          dispatch({ type: "SET_NETWORK", payload: "Razor Schain" });
-        } else {
-          dispatch({ type: "SET_NETWORK", payload: name });
+        const networkInfo = getNetworkInfo(chainId);
+        if (networkInfo) {
+          dispatch({ type: "SET_NETWORK", payload: networkInfo.name });
         }
       }
 

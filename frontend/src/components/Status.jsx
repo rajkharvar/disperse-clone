@@ -1,9 +1,10 @@
 import { useContext } from "react";
-import { scans } from "../utils/constants";
 import { NetworkContext } from "../App";
+import { getNetworkInfo } from "../utils";
 
 const Status = ({ txnStatus }) => {
   const { chainId } = useContext(NetworkContext);
+  const networkInfo = getNetworkInfo(chainId);
 
   return (
     <div
@@ -19,7 +20,7 @@ const Status = ({ txnStatus }) => {
         transaction {txnStatus.status}
       </p>
       <a
-        href={`${scans[chainId]}tx/${txnStatus.hash}`}
+        href={`${networkInfo?.blockExplorer}tx/${txnStatus.hash}`}
         target="_blank"
         className="text-xs border-gray-600 border-b-2 font-light"
       >
