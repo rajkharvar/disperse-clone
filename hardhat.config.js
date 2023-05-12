@@ -1,14 +1,11 @@
 require("@nomiclabs/hardhat-waffle");
 require("@nomiclabs/hardhat-etherscan");
 require("dotenv").config();
-const fs = require("fs");
-const MUMBAI_RPC = process.env.MUMBAI_RPC;
-const ROPSTEN_RPC = process.env.ROPSTEN_RPC;
-const RINKEBY_RPC = process.env.RINKEBY_RPC;
-const GOERLI_RPC = process.env.GOERLI_RPC;
-const KOVAN_RPC = process.env.KOVAN_RPC;
+const MUMBAI_RPC =
+  process.env.MUMBAI_RPC || "https://rpc-mumbai.maticvigil.com	";
+const GOERLI_RPC = process.env.GOERLI_RPC || "https://rpc.ankr.com/eth_goerli	";
 const SKALE_RPC = process.env.SKALE_RPC;
-const SKALE_RPC_V2 = process.env.SKALE_RPC_V2;
+const POLYGON_RPC = process.env.POLYGON_RPC || "https://polygon-rpc.com	";
 const ETHERSCAN_KEY = process.env.ETHERSCAN_KEY;
 const privateKey = process.env.PRIVATE_KEY;
 
@@ -30,20 +27,8 @@ module.exports = {
     hardhat: {
       chainId: 1337,
     },
-    ropsten: {
-      url: ROPSTEN_RPC,
-      accounts: [privateKey],
-    },
-    rinkeby: {
-      url: RINKEBY_RPC,
-      accounts: [privateKey],
-    },
     goerli: {
       url: GOERLI_RPC,
-      accounts: [privateKey],
-    },
-    kovan: {
-      url: KOVAN_RPC,
       accounts: [privateKey],
     },
     mumbai: {
@@ -55,8 +40,8 @@ module.exports = {
       accounts: [privateKey],
       gasPrice: 100000,
     },
-    skaleTestnetV2: {
-      url: SKALE_RPC_V2,
+    polygon: {
+      url: POLYGON_RPC,
       accounts: [privateKey],
     },
   },

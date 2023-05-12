@@ -9,7 +9,7 @@ export const supportedChains = [
     chainId: 80001,
     disperseAddress: "0xaf6f4A737188571d128477DEe81d54Bc63De6d80",
     blockExplorer: "https://mumbai.polygonscan.com/",
-    name: "polygon mumbai",
+    name: "mumbai",
   },
   {
     chainId: 278611351,
@@ -17,5 +17,11 @@ export const supportedChains = [
     blockExplorer:
       "https://turbulent-unique-scheat.explorer.mainnet.skalenodes.com/",
     name: "razor schain",
+  },
+  {
+    chainId: 137,
+    disperseAddress: "0x0461950C8664A38b6b1D6599420CA9c50a714B56",
+    blockExplorer: "https://polygonscan.com/",
+    name: "polygon",
   },
 ];
