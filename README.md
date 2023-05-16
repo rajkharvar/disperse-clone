@@ -2,16 +2,28 @@
 
 Disperse app lets you disperse any erc20 tokens or ethers to a number of addresses using a single transaction.
 
-Try running some of the following tasks:
-
 ## Deploy to new network ⛓️
 
-1. Deploy `Disperse.sol` using the `deploy.js` script:
+1. Clone the repository:
+   `git clone https://github.com/rajkharvar/disperse-clone.git`
 
-   - Modify the `hardhat.config.js` file to include the new network. Refer to the documentation at https://hardhat.org/hardhat-runner/docs/config for guidance.
-   - Execute the following command in your terminal or command prompt: `npx hardhat scripts/deploy.js --network [NETWORK]`
+2. Install the dependencies:
 
-2. Adding support in the frontend:
+```bash
+npm start
+# or
+yarn start
+```
+
+3. Modify the hardhat.config.js file to include the new network. Refer to the documentation at https://hardhat.org/hardhat-runner/docs/config for guidance.
+
+4. Deploy the contract:
+
+```
+npx hardhat scripts/deploy.js --network [NETWORK]
+```
+
+5. Adding support in the frontend:
 
    - Open the `constants.js` file in the `frontend/utils` directory.
    - Include the chain information and Disperse contract address by adding the following code snippet in `supportedChains` array:
@@ -25,13 +37,12 @@ Try running some of the following tasks:
      ```
      Replace `<chain_id>` with the ID of the new chain, `<disperse_address>` with the address of the deployed Disperse contract, `<block_explorer_url>` with the URL of the block explorer for the chain, and `<chain_name>` with the name of the chain.
 
-3. Verifying the contract with the relevant chain block explorer:
+6. Verifying the contract with the relevant chain block explorer:
 
    - Follow the instructions provided in the Hardhat documentation at https://hardhat.org/hardhat-runner/docs/guides/verifying to verify the deployed contract on the new network's block explorer.
 
-4. Updating the README:
-   - Edit the README file of your project.
-   - Add the chain name and hyperlink for the Disperse contract on the block explorer.
+7. Updating the README:
+   - Add the chain name and hyperlink for the Disperse contract on the block explorer in Supported Network ⛓️ and addresses in [Supported Network ⛓️ and addresses](supported-network-%EF%B8%8F-and-addresses) section
 
 ## Supported Network ⛓️ and addresses
 
