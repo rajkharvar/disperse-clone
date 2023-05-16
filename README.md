@@ -45,7 +45,7 @@ npx hardhat scripts/deploy.js --network [NETWORK]
    - Edit the README file of the project.
    - Add the chain name and hyperlink for the Disperse contract on the block explorer in Supported Network ⛓️ and addresses in [Supported Network ⛓️ and addresses](#supported-network-%EF%B8%8F-and-addresses) section
 
-## Supported Network ⛓️ and addresses
+## Supported Networks ⛓️ and addresses
 
 | Network      | Disperse contract address                                                                                                                                                     |
 | ------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
