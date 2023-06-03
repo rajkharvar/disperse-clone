@@ -24,4 +24,11 @@ export const supportedChains = [
     blockExplorer: "https://polygonscan.com/",
     name: "polygon",
   },
+  {
+    chainId: 1517929550,
+    disperseAddress: "0x553a0a6FCe2943F6901f783f381292C567038ddF",
+    blockExplorer:
+      "https://staging-aware-chief-gianfar.explorer.staging-v3.skalenodes.com/",
+    name: "skale staging",
+  },
 ];
