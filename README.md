@@ -53,3 +53,5 @@ npx hardhat scripts/deploy.js --network [NETWORK]
 | Goerli       | [0xD286f3D834E6030F178C395C9ba33d32B427cAD3](https://goerli.etherscan.io/address/0xD286f3D834E6030F178C395C9ba33d32B427cAD3)                                                  |
 | Razor Schain | [0x3bAB943FE31B0F90c1E4c2733113E336eBAC4Bc1](https://turbulent-unique-scheat.explorer.mainnet.skalenodes.com/address/0x3bAB943FE31B0F90c1E4c2733113E336eBAC4Bc1/transactions) |
 | Polygon      | [0x0461950C8664A38b6b1D6599420CA9c50a714B56](https://polygonscan.com/address/0x0461950C8664A38b6b1D6599420CA9c50a714B56)                                                      |
+| Skale Staging      | [0x553a0a6FCe2943F6901f783f381292C567038ddF](https://staging-aware-chief-gianfar.explorer.staging-v3.skalenodes.com/address/0x553a0a6FCe2943F6901f783f381292C567038ddF)                                                      |
+
