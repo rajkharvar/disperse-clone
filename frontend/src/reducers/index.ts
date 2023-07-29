@@ -1,10 +1,10 @@
 type StateType = {
-  chainId: number | null;
+  chainId: number;
   network: string | null;
 };
 
 export const initState: StateType = {
-  chainId: null,
+  chainId: 0,
   network: null,
 };
 
@@ -35,7 +35,7 @@ export const reducer = (
 };
 
 type NetworkContextType = {
-  chainId: number | null;
+  chainId: number;
   network: string | null;
 };
 

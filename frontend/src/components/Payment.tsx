@@ -44,7 +44,7 @@ const Payment = ({ address }: PaymentProps) => {
   const networkInfo = getNetworkInfo(chainId);
   const disperseAddress = networkInfo?.disperseAddress;
 
-  const getEthBalance = async (ethereum) => {
+  const getEthBalance = async (ethereum: any) => {
     if (!ethBalance) {
       const provider = new ethers.providers.Web3Provider(ethereum);
       const balance = await provider.getBalance(address);
