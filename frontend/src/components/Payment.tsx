@@ -7,26 +7,39 @@ import Recipients from "./Recipients";
 import { NetworkContext } from "../App";
 import { getNetworkInfo, parseText, getWarnMessage } from "../utils/index";
 import Ether from "./Ether";
+import { TxStatus } from "../types/Transaction";
+import { RecipientInfo } from "../types/Recipient";
 
-const Payment = ({ address }) => {
-  const defaultTokenDetails = {
+type TokenDetails = {
+  name: string | null;
+  symbol: string | null;
+  balance: string | null;
+};
+
+type PaymentProps = {
+  address: string;
+};
+
+const Payment = ({ address }: PaymentProps) => {
+  const defaultTokenDetails: TokenDetails = {
     name: null,
     symbol: null,
     balance: null,
   };
   const { chainId } = useContext(NetworkContext);
-  const [currentLink, setCurrentLink] = useState(null);
-  const [ethBalance, setEthBalance] = useState(null);
+  const [currentLink, setCurrentLink] = useState<string | null>(null);
+  const [ethBalance, setEthBalance] = useState<string | null>(null);
   const [tokenAddress, setTokenAddress] = useState("");
-  const [tokenDetails, setTokenDetails] = useState(defaultTokenDetails);
+  const [tokenDetails, setTokenDetails] =
+    useState<TokenDetails>(defaultTokenDetails);
   const [textValue, setTextValue] = useState("");
   const [isTokenLoading, setIsTokenLoading] = useState(false);
-  const [recipientsData, setRecipientsData] = useState([]);
-  const [total, setTotal] = useState(null);
-  const [remaining, setRemaining] = useState(null);
-  const [warn, setWarn] = useState(null);
-  const [txStatus, setTxStatus] = useState(null);
-  const [approveStatus, setApproveStatus] = useState(null);
+  const [recipientsData, setRecipientsData] = useState<RecipientInfo[]>([]);
+  const [total, setTotal] = useState<ethers.BigNumber | null>(null);
+  const [remaining, setRemaining] = useState<string | null>(null);
+  const [warn, setWarn] = useState<string | null>(null);
+  const [txStatus, setTxStatus] = useState<TxStatus | null>(null);
+  const [approveStatus, setApproveStatus] = useState<TxStatus | null>(null);
   const [isInvalidToken, setIsInvalidToken] = useState(false);
   const networkInfo = getNetworkInfo(chainId);
   const disperseAddress = networkInfo?.disperseAddress;
@@ -34,8 +47,8 @@ const Payment = ({ address }) => {
   const getEthBalance = async (ethereum) => {
     if (!ethBalance) {
       const provider = new ethers.providers.Web3Provider(ethereum);
-      let ethBalance = await provider.getBalance(address);
-      ethBalance = ethers.utils.formatEther(ethBalance);
+      const balance = await provider.getBalance(address);
+      const ethBalance = ethers.utils.formatEther(balance);
       setEthBalance(ethBalance);
     }
   };

@@ -8,15 +8,17 @@ import WalletInfo from "./components/WalletInfo";
 import Warn from "./components/Warn";
 import Web3Modal from "web3modal";
 import Connect from "./components/Connect";
-import { initState, reducer } from "./reducers/index";
+import { initNetworkContextType, initState, reducer } from "./reducers";
 import { getNetworkInfo, isChainSupported } from "./utils";
 
-export const NetworkContext = createContext();
+export const NetworkContext = createContext(initNetworkContextType);
 
 function App() {
-  const [isMetamaskConnected, setIsMetamaskConnected] = useState();
-  const [isMetamaskInstalled, setIsMetamaskInstalled] = useState();
-  const [address, setAddress] = useState(null);
+  const [isMetamaskConnected, setIsMetamaskConnected] =
+    useState<boolean>(false);
+  const [isMetamaskInstalled, setIsMetamaskInstalled] =
+    useState<boolean>(false);
+  const [address, setAddress] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [state, dispatch] = useReducer(reducer, initState);
 
@@ -57,6 +59,7 @@ function App() {
   };
 
   const checkAccountConnected = async () => {
+    const { ethereum } = window;
     const provider = new ethers.providers.Web3Provider(ethereum);
     const accounts = await provider.listAccounts();
     if (!accounts.length) {
@@ -84,7 +87,7 @@ function App() {
     if (ethereum) {
       setIsMetamaskInstalled(true);
       checkAccountConnected();
-      fetchNetworkDetails(ethereum);
+      fetchNetworkDetails();
     } else {
       setIsMetamaskInstalled(false);
     }

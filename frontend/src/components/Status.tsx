@@ -1,8 +1,13 @@
 import { useContext } from "react";
 import { NetworkContext } from "../App";
 import { getNetworkInfo } from "../utils";
+import { TxStatus } from "../types/Transaction";
 
-const Status = ({ txnStatus }) => {
+type StatusProps = {
+  txnStatus: TxStatus;
+};
+
+const Status = ({ txnStatus }: StatusProps) => {
   const { chainId } = useContext(NetworkContext);
   const networkInfo = getNetworkInfo(chainId);
 
