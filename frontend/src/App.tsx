@@ -14,10 +14,8 @@ import { getNetworkInfo, isChainSupported } from "./utils";
 export const NetworkContext = createContext(initNetworkContextType);
 
 function App() {
-  const [isMetamaskConnected, setIsMetamaskConnected] =
-    useState<boolean>(false);
-  const [isMetamaskInstalled, setIsMetamaskInstalled] =
-    useState<boolean>(false);
+  const [isMetamaskConnected, setIsMetamaskConnected] = useState(false);
+  const [isMetamaskInstalled, setIsMetamaskInstalled] = useState(false);
   const [address, setAddress] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [state, dispatch] = useReducer(reducer, initState);
