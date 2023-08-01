@@ -25,7 +25,7 @@ npx hardhat scripts/deploy.js --network [NETWORK]
 
 5. Adding support in the frontend:
 
-   - Open the `constants.js` file in the `frontend/utils` directory.
+   - Open the `constants.ts` file in the `frontend/utils` directory.
    - Include the chain information and Disperse contract address by adding the following code snippet in `supportedChains` array:
      ```javascript
      {

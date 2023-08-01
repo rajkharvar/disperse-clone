@@ -1,4 +1,8 @@
-const Connect = ({ connect }) => {
+type ConnectProps = {
+  connect: () => void;
+};
+
+const Connect = ({ connect }: ConnectProps) => {
   return (
     <div className="pt-16">
       <h3 className="text-2xl font-light italic">connect to wallet</h3>

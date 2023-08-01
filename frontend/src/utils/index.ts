@@ -1,9 +1,11 @@
 import { ethers } from "ethers";
-import { supportedChains } from "./constants";
+import { ChainInfo, supportedChains } from "./constants";
+import { RecipientInfo } from "../types/Recipient";
 
-export const isValidAddress = (address) => ethers.utils.isAddress(address);
+export const isValidAddress = (address: string) =>
+  ethers.utils.isAddress(address);
 
-export const isValidValue = (value) => {
+export const isValidValue = (value: string): ethers.BigNumber | false => {
   try {
     return ethers.utils.parseUnits(value, "ether");
   } catch (err) {
@@ -11,13 +13,13 @@ export const isValidValue = (value) => {
   }
 };
 
-export const isChainSupported = (chainId) =>
+export const isChainSupported = (chainId: number) =>
   supportedChains.some((chain) => chain.chainId === chainId);
 
-export const getNetworkInfo = (chainId) =>
+export const getNetworkInfo = (chainId: number): ChainInfo | undefined =>
   supportedChains.find((chain) => chain.chainId === chainId);
 
-export const getWarnMessage = () => {
+export const getWarnMessage = (): string => {
   let networks = ``;
   supportedChains.map((chain, i) => {
     if (i === 0) {
@@ -31,9 +33,9 @@ export const getWarnMessage = () => {
   return `*Supports ${networks}*`;
 };
 
-export const parseText = (textValue) => {
+export const parseText = (textValue: string): RecipientInfo[] => {
   const lines = textValue.split("\n");
-  let updatedRecipients = [];
+  let updatedRecipients: RecipientInfo[] = [];
 
   lines.map((line) => {
     if (

@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "tsc && vite build",
     "serve": "vite preview"
   },
   "dependencies": {
@@ -13,10 +13,13 @@
     "web3modal": "^1.9.4"
   },
   "devDependencies": {
+    "@types/react": "^18.2.16",
+    "@types/react-dom": "^18.2.7",
     "@vitejs/plugin-react": "^1.0.0",
     "autoprefixer": "^10.4.0",
     "postcss": "^8.4.4",
     "tailwindcss": "^2.2.19",
+    "typescript": "^5.1.6",
     "vite": "^2.6.4"
   }
 }

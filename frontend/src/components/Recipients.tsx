@@ -1,4 +1,14 @@
-const Recipients = ({ tokenSymbol, textValue, setTextValue }) => {
+type RecipientsProps = {
+  tokenSymbol: string | null;
+  textValue: string;
+  setTextValue: React.Dispatch<React.SetStateAction<string>>;
+};
+
+const Recipients = ({
+  tokenSymbol,
+  textValue,
+  setTextValue,
+}: RecipientsProps) => {
   return (
     <div className="pt-16">
       <h3 className="text-2xl font-light italic">recipients and amounts</h3>

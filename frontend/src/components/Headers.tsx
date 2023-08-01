@@ -2,8 +2,13 @@ import { useContext } from "react";
 import { NetworkContext } from "../App";
 import EthereumSVG from "../assets/ethereum.svg";
 
-const Header = ({ address }) => {
+type HeaderProps = {
+  address: string | null;
+};
+
+const Header = ({ address }: HeaderProps) => {
   const networkContext = useContext(NetworkContext);
+
   return (
     <div>
       <div className="flex space-between">
