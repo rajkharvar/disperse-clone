@@ -31,4 +31,11 @@ export const supportedChains = [
       "https://staging-aware-chief-gianfar.explorer.staging-v3.skalenodes.com/",
     name: "skale staging",
   },
+  {
+    chainId: 1444673419,
+    disperseAddress: "0x596df15B63d0f9CB9690BbdAecE64db59637Bf22",
+    blockExplorer:
+      "https://juicy-low-small-testnet.explorer.testnet.skalenodes.com/",
+    name: "europa testnet",
+  },
 ];

@@ -44,6 +44,10 @@ module.exports = {
       url: POLYGON_RPC,
       accounts: [privateKey],
     },
+    europaTestnet: {
+      url: "https://testnet.skalenodes.com/v1/juicy-low-small-testnet",
+      accounts: [privateKey],
+    },
   },
   etherscan: {
     apiKey: ETHERSCAN_KEY,
