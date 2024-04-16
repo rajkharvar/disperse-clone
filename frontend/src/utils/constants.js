@@ -38,4 +38,10 @@ export const supportedChains = [
       "https://juicy-low-small-testnet.explorer.testnet.skalenodes.com/",
     name: "europa testnet",
   },
+  {
+    chainId: 11155420,
+    disperseAddress: "0xC181C71991FFfE9952B023835DE79D7EcC67AE9B",
+    blockExplorer: "https://sepolia-optimism.etherscan.io/",
+    name: "optimism sepolia",
+  },
 ];

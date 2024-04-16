@@ -48,6 +48,10 @@ module.exports = {
       url: "https://testnet.skalenodes.com/v1/juicy-low-small-testnet",
       accounts: [privateKey],
     },
+    opSepolia: {
+      url: "https://sepolia.optimism.io",
+      accounts: [privateKey],
+    },
   },
   etherscan: {
     apiKey: ETHERSCAN_KEY,
