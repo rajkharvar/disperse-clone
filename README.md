@@ -47,11 +47,12 @@ npx hardhat scripts/deploy.js --network [NETWORK]
 
 ## Supported Networks and addresses
 
-| Network        | Disperse contract address                                                                                                                                                     |
-| -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Mumbai         | [0xaf6f4A737188571d128477DEe81d54Bc63De6d80](https://mumbai.polygonscan.com/address/0xaf6f4A737188571d128477DEe81d54Bc63De6d80)                                               |
-| Goerli         | [0xD286f3D834E6030F178C395C9ba33d32B427cAD3](https://goerli.etherscan.io/address/0xD286f3D834E6030F178C395C9ba33d32B427cAD3)                                                  |
-| Razor Schain   | [0x3bAB943FE31B0F90c1E4c2733113E336eBAC4Bc1](https://turbulent-unique-scheat.explorer.mainnet.skalenodes.com/address/0x3bAB943FE31B0F90c1E4c2733113E336eBAC4Bc1/transactions) |
-| Polygon        | [0x0461950C8664A38b6b1D6599420CA9c50a714B56](https://polygonscan.com/address/0x0461950C8664A38b6b1D6599420CA9c50a714B56)                                                      |
-| Skale Staging  | [0x553a0a6FCe2943F6901f783f381292C567038ddF](https://staging-aware-chief-gianfar.explorer.staging-v3.skalenodes.com/address/0x553a0a6FCe2943F6901f783f381292C567038ddF)       |
-| Europa Testnet | [0x596df15B63d0f9CB9690BbdAecE64db59637Bf22](https://juicy-low-small-testnet.explorer.testnet.skalenodes.com/address/0x596df15B63d0f9CB9690BbdAecE64db59637Bf22)              |
+| Network          | Disperse contract address                                                                                                                                                     |
+| ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Mumbai           | [0xaf6f4A737188571d128477DEe81d54Bc63De6d80](https://mumbai.polygonscan.com/address/0xaf6f4A737188571d128477DEe81d54Bc63De6d80)                                               |
+| Goerli           | [0xD286f3D834E6030F178C395C9ba33d32B427cAD3](https://goerli.etherscan.io/address/0xD286f3D834E6030F178C395C9ba33d32B427cAD3)                                                  |
+| Razor Schain     | [0x3bAB943FE31B0F90c1E4c2733113E336eBAC4Bc1](https://turbulent-unique-scheat.explorer.mainnet.skalenodes.com/address/0x3bAB943FE31B0F90c1E4c2733113E336eBAC4Bc1/transactions) |
+| Polygon          | [0x0461950C8664A38b6b1D6599420CA9c50a714B56](https://polygonscan.com/address/0x0461950C8664A38b6b1D6599420CA9c50a714B56)                                                      |
+| Skale Staging    | [0x553a0a6FCe2943F6901f783f381292C567038ddF](https://staging-aware-chief-gianfar.explorer.staging-v3.skalenodes.com/address/0x553a0a6FCe2943F6901f783f381292C567038ddF)       |
+| Europa Testnet   | [0x596df15B63d0f9CB9690BbdAecE64db59637Bf22](https://juicy-low-small-testnet.explorer.testnet.skalenodes.com/address/0x596df15B63d0f9CB9690BbdAecE64db59637Bf22)              |
+| Optimism Sepolia | [0xC181C71991FFfE9952B023835DE79D7EcC67AE9B](https://sepolia-optimism.etherscan.io/address/0xC181C71991FFfE9952B023835DE79D7EcC67AE9B)                                        |
