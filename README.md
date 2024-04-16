@@ -55,4 +55,4 @@ npx hardhat scripts/deploy.js --network [NETWORK]
 | Polygon          | [0x0461950C8664A38b6b1D6599420CA9c50a714B56](https://polygonscan.com/address/0x0461950C8664A38b6b1D6599420CA9c50a714B56)                                                      |
 | Skale Staging    | [0x553a0a6FCe2943F6901f783f381292C567038ddF](https://staging-aware-chief-gianfar.explorer.staging-v3.skalenodes.com/address/0x553a0a6FCe2943F6901f783f381292C567038ddF)       |
 | Europa Testnet   | [0x596df15B63d0f9CB9690BbdAecE64db59637Bf22](https://juicy-low-small-testnet.explorer.testnet.skalenodes.com/address/0x596df15B63d0f9CB9690BbdAecE64db59637Bf22)              |
-| Optimism Sepolia | [0x596df15B63d0f9CB9690BbdAecE64db59637Bf22](https://sepolia-optimism.etherscan.io/address/0xc181c71991fffe9952b023835de79d7ecc67ae9b)                                        |
+| Optimism Sepolia | [0xC181C71991FFfE9952B023835DE79D7EcC67AE9B](https://sepolia-optimism.etherscan.io/address/0xC181C71991FFfE9952B023835DE79D7EcC67AE9B)                                        |
