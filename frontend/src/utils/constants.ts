@@ -38,4 +38,17 @@ export const supportedChains: ChainInfo[] = [
       "https://staging-aware-chief-gianfar.explorer.staging-v3.skalenodes.com/",
     name: "skale staging",
   },
+  {
+    chainId: 1444673419,
+    disperseAddress: "0x596df15B63d0f9CB9690BbdAecE64db59637Bf22",
+    blockExplorer:
+      "https://juicy-low-small-testnet.explorer.testnet.skalenodes.com/",
+    name: "europa testnet",
+  },
+  {
+    chainId: 11155420,
+    disperseAddress: "0xC181C71991FFfE9952B023835DE79D7EcC67AE9B",
+    blockExplorer: "https://sepolia-optimism.etherscan.io/",
+    name: "optimism sepolia",
+  },
 ];
