@@ -1,6 +1,19 @@
 import { ethers } from "ethers";
-import { useState, useEffect, useContext } from "react";
+import { useEffect, useState } from "react";
+import { RecipientInfo } from "../types/Recipient";
+import { TxStatus } from "../types/Transaction";
 import Status from "./Status";
+
+type ConfirmProps = {
+  recipientsData: RecipientInfo[];
+  total: ethers.BigNumber | null;
+  tokenBalance: string | null;
+  remaining: string | null;
+  approve: () => Promise<void>;
+  disperse: () => Promise<void>;
+  txStatus: TxStatus | null;
+  approveStatus: TxStatus | null;
+};
 
 const Confirm = ({
   recipientsData,
@@ -11,7 +24,7 @@ const Confirm = ({
   disperse,
   txStatus,
   approveStatus,
-}) => {
+}: ConfirmProps) => {
   const [isDisabled, setIsDisabled] = useState(false);
 
   useEffect(() => {
@@ -31,8 +44,8 @@ const Confirm = ({
           </div>
         </li>
         {recipientsData.length > 0 &&
-          recipientsData.map((recipient) => (
-            <li>
+          recipientsData.map((recipient, index) => (
+            <li key={index}>
               <div className="flex justify-between mt-2">
                 <p>{recipient.address}</p>
                 {/* TODO: Add Horizontal line here */}

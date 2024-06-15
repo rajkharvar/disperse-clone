@@ -6,15 +6,21 @@ import { getNetworkInfo, parseText } from "../utils/index";
 import Recipients from "./Recipients";
 import ConfirmEther from "./ConfirmEther";
 import { NetworkContext } from "../App";
+import { TxStatus } from "../types/Transaction";
+import { RecipientInfo } from "../types/Recipient";
 
-const Ether = ({ address }) => {
-  const [ethBalance, setEthBalance] = useState(null);
+type EtherProps = {
+  address: string;
+};
+
+const Ether = ({ address }: EtherProps) => {
+  const [ethBalance, setEthBalance] = useState<string | null>(null);
   const [textValue, setTextValue] = useState("");
-  const [total, setTotal] = useState(null);
-  const [recipientsData, setRecipientsData] = useState([]);
-  const [remaining, setRemaining] = useState(null);
+  const [total, setTotal] = useState<ethers.BigNumber | null>(null);
+  const [recipientsData, setRecipientsData] = useState<RecipientInfo[]>([]);
+  const [remaining, setRemaining] = useState<string | null>(null);
   const { chainId } = useContext(NetworkContext);
-  const [txStatus, setTxStatus] = useState(null);
+  const [txStatus, setTxStatus] = useState<TxStatus | null>(null);
   const networkInfo = getNetworkInfo(chainId);
   const disperseAddress = networkInfo?.disperseAddress;
 
@@ -22,8 +28,8 @@ const Ether = ({ address }) => {
     const { ethereum } = window;
     if (!ethBalance) {
       const provider = new ethers.providers.Web3Provider(ethereum);
-      let ethBalance = await provider.getBalance(address);
-      ethBalance = ethers.utils.formatEther(ethBalance);
+      const balance = await provider.getBalance(address);
+      const ethBalance = ethers.utils.formatEther(balance);
       setEthBalance(ethBalance);
     }
   };

@@ -1,7 +1,17 @@
 import { ethers } from "ethers";
-import { useContext, useEffect, useState } from "react";
-import { NetworkContext } from "../App";
+import { useEffect, useState } from "react";
+import { RecipientInfo } from "../types/Recipient";
+import { TxStatus } from "../types/Transaction";
 import Status from "./Status";
+
+type ConfirmEtherProps = {
+  recipientsData: RecipientInfo[];
+  total: ethers.BigNumber | null;
+  tokenBalance: string | null;
+  remaining: string | null;
+  disperse: () => Promise<void>;
+  txStatus: TxStatus | null;
+};
 
 const ConfirmEther = ({
   recipientsData,
@@ -10,9 +20,8 @@ const ConfirmEther = ({
   remaining,
   disperse,
   txStatus,
-}) => {
+}: ConfirmEtherProps) => {
   const [isDisabled, setIsDisabled] = useState(false);
-  const { chainId } = useContext(NetworkContext);
 
   useEffect(() => {
     if (total && tokenBalance) {

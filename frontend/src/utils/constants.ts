@@ -1,4 +1,11 @@
-export const supportedChains = [
+export type ChainInfo = {
+  chainId: number,
+  disperseAddress: string,
+  blockExplorer: string,
+  name: string,
+};
+
+export const supportedChains: ChainInfo[] = [
   {
     chainId: 5,
     disperseAddress: "0xD286f3D834E6030F178C395C9ba33d32B427cAD3",
