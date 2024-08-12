@@ -51,4 +51,10 @@ export const supportedChains: ChainInfo[] = [
     blockExplorer: "https://sepolia-optimism.etherscan.io/",
     name: "optimism sepolia",
   },
+  {
+    chainId: 837567383277,
+    disperseAddress: "0xf5E9C9e246754700fCeF2e6E55E4Fcb5cF3DB078",
+    blockExplorer: "https://explorer.metalayer.net/",
+    name: "private Geth",
+  },
 ];
