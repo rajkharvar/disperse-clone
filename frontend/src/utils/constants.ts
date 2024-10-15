@@ -1,8 +1,8 @@
 export type ChainInfo = {
-  chainId: number,
-  disperseAddress: string,
-  blockExplorer: string,
-  name: string,
+  chainId: number;
+  disperseAddress: string;
+  blockExplorer: string;
+  name: string;
 };
 
 export const supportedChains: ChainInfo[] = [
@@ -56,5 +56,11 @@ export const supportedChains: ChainInfo[] = [
     disperseAddress: "0xf5E9C9e246754700fCeF2e6E55E4Fcb5cF3DB078",
     blockExplorer: "https://explorer.metalayer.net/",
     name: "private Geth",
+  },
+  {
+    chainId: 2046399126,
+    disperseAddress: "0x21D69Fa152Daad57CF1B841442F4C34A6f14d7cc",
+    blockExplorer: "https://elated-tan-skat.explorer.mainnet.skalenodes.com/",
+    name: "Europa Liquidity Hub",
   },
 ];
