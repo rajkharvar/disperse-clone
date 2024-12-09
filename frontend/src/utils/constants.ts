@@ -63,4 +63,10 @@ export const supportedChains: ChainInfo[] = [
     blockExplorer: "https://elated-tan-skat.explorer.mainnet.skalenodes.com/",
     name: "Europa Liquidity Hub",
   },
+  {
+    chainId: 7777123123,
+    disperseAddress: "0x54510dA48aE512387111623D59812B794d11754f",
+    blockExplorer: "http://34.143.211.226:32808/",
+    name: "Test Network",
+  },
 ];
