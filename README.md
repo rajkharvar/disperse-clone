@@ -1,8 +1,8 @@
-# Disperse app clone
+# Disperse App
 
-Disperse app lets you disperse any erc20 tokens or ethers to a number of addresses using a single transaction.
+The Disperse app allows you to distribute any ERC20 tokens or ethers to multiple addresses using a single transaction.
 
-## Deploy to new network ⛓️
+## Deploy to a New Network ⛓️
 
 1. Clone the repository:
    `git clone https://github.com/rajkharvar/disperse-clone.git`
